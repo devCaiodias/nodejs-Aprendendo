@@ -5,7 +5,7 @@ const service = express()
 service.get("/hello", (req, res) => {
     const {nome, idade} = req.query
     res.json({
-        message: "Helloo word",
+        message: "Helloo word  query params",
         nome,
         idade
     })
@@ -17,7 +17,7 @@ service.get("/hello/:nome", (req, res) => {
     const nome = req.params.nome
 
     res.json({
-        message: "Helloo word",
+        message: "Helloo word Route params",
         nome
     })
 })
