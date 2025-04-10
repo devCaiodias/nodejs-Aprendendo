@@ -21,4 +21,14 @@ service.get("/customers/:id", (req, res) => {
     res.status(status).json(customer)
 1})
 
+service.post("/customers", (req, res) => {
+    const {name, site} = req.body;
+    const nextId = customers[customers.length -1].id + 1
+
+    const newCustomer = {id: nextId, name, site}
+    customers.push(newCustomer)
+
+    return res.status(201).json(newCustomer)
+})
+
 service.listen(3000)
