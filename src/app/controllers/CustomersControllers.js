@@ -3,10 +3,8 @@ let customers = [
     { id: 2, name: "Google", site: "https://google.com",},
     { id: 3, name: "Uol", site: "https://uol.com.br",}
 ]
-class CustomersControllers {
 
-    constructor() {
-    }
+class CustomersControllers {
 
     // Listando todos os customers
     indeX(req, res) {
@@ -62,4 +60,4 @@ class CustomersControllers {
     }
 }
 
-module.exports = new CustomersControllers();
+export default new CustomersControllers();
