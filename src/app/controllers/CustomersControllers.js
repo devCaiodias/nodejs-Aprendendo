@@ -1,3 +1,6 @@
+import Customer from '../models/Customer.js';
+
+
 let customers = [
     { id: 1, name: "Caio", site: "https://devcaiodias.github.io/DevCaiodias-portfolio/",},
     { id: 2, name: "Google", site: "https://google.com",},
@@ -7,8 +10,9 @@ let customers = [
 class CustomersControllers {
 
     // Listando todos os customers
-    indeX(req, res) {
-        return res.json(customers)
+    async index(req, res) {
+        const data = await Customer.findAll({ limit: 1000 })
+        return res.json(data)
     }
 
     // Listando os customers por id
