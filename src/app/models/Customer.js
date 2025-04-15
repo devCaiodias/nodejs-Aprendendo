@@ -7,7 +7,11 @@ class Customer extends Model {
             email: Sequelize.STRING,
             status: Sequelize.ENUM("ACTIVE","ARCHIVED")
         },{
-            sequelize
+            sequelize,
+            name: {
+                singular: "customer",
+                plural: "customers"
+            }
         })
     }
     static associate(models) {

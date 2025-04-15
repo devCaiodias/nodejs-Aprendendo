@@ -8,7 +8,11 @@ class Users extends Model {
             password_hash: Sequelize.STRING
         },
         {
-            sequelize
+            sequelize,
+            name: {
+                singular: "user",
+                plural: "users"
+            }
         })
     }
 }
