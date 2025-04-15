@@ -5,7 +5,7 @@ module.exports = {
     password: '28292425',
     database: 'customers',
     define: {
-        timestamps: true,          // Corrigido de "timestamp"
+        timestamps: true,
         underscored: true,
         underscoredAll: true,
     }
