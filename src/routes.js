@@ -1,7 +1,7 @@
 import { Router } from "express";
 import customers from "./app/controllers/CustomersControllers"
 import contact from "./app/controllers/ContactsControllers";
-
+import users from "./app/controllers/UsersControllers"
 const routes = new Router();
 
 // Customers Route
@@ -19,6 +19,12 @@ routes.post("/customers/:customerId/contacts", contact.create)
 routes.put("/customers/:customerId/contacts/:id", contact.update)
 routes.delete("/customers/:customerId/contacts/:id", contact.delete)
 
+// Customers Users
+routes.get("/users", users.index)
+routes.get("/users/:id", users.show)
+routes.post("/users", users.create)
+routes.put("/users/:id", users.update)
+routes.delete("/users/:id", users.delete)
 
 
 export default routes;
