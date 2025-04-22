@@ -125,8 +125,49 @@ class UsersControllers {
     }
 
     async update(req, res) {
+        const schema = Yup.object().shape({
+            name: Yup.string(),
+            email: Yup.string().email(),
+            oldPassword: Yup.string().min(8),
+            password: Yup.string()
+            .min(8)
+            .when("oldPassword", {
+            is: (val) => !!val,
+            then: (schema) => schema.required("A nova senha é obrigatória"),
+            otherwise: (schema) => schema.notRequired(),
+            }),
+        passwordConfirmation: Yup.string().when("password", {
+            is: (val) => !!val,
+            then: (schema) =>
+            schema
+                .required("Confirmação de senha obrigatória")
+                .oneOf([Yup.ref("password")], "As senhas não coincidem"),
+            otherwise: (schema) => schema.notRequired(),
+        }),
+        });
         
+        if (!(await schema.isValid(req.body))) {
+            return res.status(400).json({ error: "Verifique os dados!" });
+        }
+        
+        const user = await Users.findByPk(req.params.id);
+        if (!user) return res.status(404).json({ error: "Usuário não encontrado" });
+        
+        const { oldPassword } = req.body;
+        
+        if (oldPassword && !(await user.checkPassword(oldPassword))) {
+            return res.status(401).json({ error: "Senha antiga incorreta" });
+        }
+        
+          // Atualiza os dados direto na instância do usuário
+        user.set(req.body);
+        await user.save();
+        
+        const { id, name, email, createdAt, updatedAt } = user;
+        
+        return res.status(201).json({ id, name, email, createdAt, updatedAt });
     }
+
 
     async delete(req, res) {
         
