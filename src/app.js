@@ -1,5 +1,6 @@
 import express from "express"
 import routes from "./routes"
+import authMiddlewares from "./app/middleswares/auth.js"
 
 import "./database"
 
@@ -12,6 +13,7 @@ class App {
 
     middlewares () {
         this.server.use(express.json())
+        this.server.use(authMiddlewares)
 
     }
 
