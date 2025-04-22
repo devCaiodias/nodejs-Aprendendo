@@ -99,7 +99,9 @@ class UsersControllers {
             return res.status(404).json()
         }
 
-        return res.json(user)
+        const {id, name, email, createdAt, updatedAt} = user
+
+        return res.json({id, name, email, createdAt, updatedAt})
     }
 
     async create(req, res) {
@@ -170,7 +172,15 @@ class UsersControllers {
 
 
     async delete(req, res) {
+        const user = await Users.findByPk(req.params.id)
         
+        if (!user) {
+            return res.status(404).json()
+        }
+
+        await user.destroy()
+
+        return res.json()
     }
 }
 
