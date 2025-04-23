@@ -2,7 +2,17 @@ import { Router } from "express";
 import customers from "./app/controllers/CustomersControllers"
 import contact from "./app/controllers/ContactsControllers";
 import users from "./app/controllers/UsersControllers"
+import sessions from "./app/controllers/SessionsControllers"
+
+import auth from "./app/middleswares/auth"
+
 const routes = new Router();
+
+// Session 
+routes.post("/sessions", sessions.create)
+
+// Controle a acesso a partir desse ponto
+routes.use(auth)
 
 // Customers Route
 routes.get("/customers", customers.index)
