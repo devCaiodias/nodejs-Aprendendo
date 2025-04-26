@@ -8,6 +8,7 @@
     "date-fns": "^4.1.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.2",
     "nodemon": "^3.1.9",
     "pg": "^8.14.1",
     "pg-hstore": "^2.3.4",
@@ -15,7 +16,8 @@
     "yup": "^1.6.1"
   },
   "scripts": {
-    "dev": "nodemon ./src/server.js"
+    "dev": "nodemon ./src/server.js",
+    "playground": "nodemon ./src/playground.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",

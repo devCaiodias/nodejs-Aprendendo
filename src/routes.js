@@ -1,12 +1,16 @@
 import { Router } from "express";
+import multer from "multer"
+import multerConfg from "./config/multer"
 import customers from "./app/controllers/CustomersControllers"
 import contact from "./app/controllers/ContactsControllers";
 import users from "./app/controllers/UsersControllers"
 import sessions from "./app/controllers/SessionsControllers"
 
 import auth from "./app/middleswares/auth"
+import { json } from "sequelize";
 
 const routes = new Router();
+const upload = multer(multerConfg)
 
 // Session 
 routes.post("/sessions", sessions.create)
@@ -36,5 +40,10 @@ routes.post("/users", users.create)
 routes.put("/users/:id", users.update)
 routes.delete("/users/:id", users.delete)
 
+
+// files
+routes.post("/files", upload.single("file"), (req, res) => {
+    return res.json({ response: "ok" });
+});
 
 export default routes;
