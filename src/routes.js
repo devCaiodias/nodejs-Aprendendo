@@ -5,6 +5,7 @@ import customers from "./app/controllers/CustomersControllers"
 import contact from "./app/controllers/ContactsControllers";
 import users from "./app/controllers/UsersControllers"
 import sessions from "./app/controllers/SessionsControllers"
+import files from "./app/controllers/FileControllers"
 
 import auth from "./app/middleswares/auth"
 import { json } from "sequelize";
@@ -42,8 +43,6 @@ routes.delete("/users/:id", users.delete)
 
 
 // files
-routes.post("/files", upload.single("file"), (req, res) => {
-    return res.json({ response: "ok" });
-});
+routes.post("/files", upload.single("file"), files.create);
 
 export default routes;

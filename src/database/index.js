@@ -5,9 +5,10 @@ import config from '../config/database.js'
 import Customer from '../app/models/Customer.js';
 import Contact from '../app/models/Contact.js';
 import Users from '../app/models/Users.js';
+import File from '../app/models/File.js'
 
 
-const models =  [Customer, Contact, Users]
+const models =  [Customer, Contact, Users, File]
 
 class Database {
     constructor () {
