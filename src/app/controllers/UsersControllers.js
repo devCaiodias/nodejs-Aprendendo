@@ -95,15 +95,17 @@ class UsersControllers {
     }
 
     async show(req, res) {
-        const user = await Users.findByPk(req.params.id) 
+        const user = await Users.findByPk(req.params.id, {
+            attributes: {exclude: ['password', "password_hash"]}
+        }) 
         
         if (!user) {
             return res.status(404).json()
         }
 
-        const {id, name, email, createdAt, updatedAt} = user
+        const {id, name, email,file_id, createdAt, updatedAt} = user
 
-        return res.json({id, name, email, createdAt, updatedAt})
+        return res.json({id, name, email, file_id, createdAt, updatedAt})
     }
 
     async create(req, res) {
@@ -123,9 +125,9 @@ class UsersControllers {
             })
         }
 
-        const {id, name, email, createdAt, updatedAt} = await Users.create(req.body)
+        const {id, name, email, file_id, createdAt, updatedAt} = await Users.create(req.body)
 
-        return res.status(201).json({id, name, email, createdAt, updatedAt})
+        return res.status(201).json({id, name, email,file_id, createdAt, updatedAt})
     }
 
     async update(req, res) {
@@ -167,9 +169,9 @@ class UsersControllers {
         user.set(req.body);
         await user.save();
         
-        const { id, name, email, createdAt, updatedAt } = user;
+        const { id, name, email, file_id, createdAt, updatedAt } = user;
         
-        return res.status(201).json({ id, name, email, createdAt, updatedAt });
+        return res.status(201).json({ id, name, email,  file_id, createdAt, updatedAt });
     }
 
 
